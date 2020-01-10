@@ -7,4 +7,6 @@ urlpatterns = [
     path('api/profile/', views.ProfileList.as_view()),
     path('api-token-auth/', obtain_auth_token),
     path('signup/', views.signup, name='signup' ),
+    path('account/', include('django.contrib.auth.urls')),
+    path('index/', views.index, name='index')
 ]

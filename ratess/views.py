@@ -5,6 +5,10 @@ from .models import Project, Profile
 from .serializer import ProjectSerializer, ProfileSerializer
 from rest_framework import status   # handles all status code responses
 from .forms import SignUpForm 
+from django.contrib.auth import login, authenticate
+from django.shortcuts import render, redirect, get_object_or_404
+from django.views.decorators.csrf import csrf_exempt
+
 
 #........
 # Create your views here.
@@ -54,3 +58,6 @@ def signup(request):
         form = SignUpForm()
     return render(request, 'registration/signup.html', {'form': form})
 
+@csrf_exempt
+def index(request):
+    return render(request, 'index.html')
