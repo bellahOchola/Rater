@@ -4,7 +4,7 @@ from rest_framework.views import APIView
 from .models import Project, Profile
 from .serializer import ProjectSerializer, ProfileSerializer
 from rest_framework import status   # handles all status code responses
-from .forms import SignUpForm 
+from .forms import SignUpForm, UploadForm 
 from django.contrib.auth import login, authenticate
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.decorators.csrf import csrf_exempt
