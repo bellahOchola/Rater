@@ -9,5 +9,5 @@ class Project(models.Model):
 
 class Profile(models.Model):
     bio = models.TextField(max_length = 500)
-    Profile_pic = models.ImageField(upload_to = 'profile_images/')
+    profile_pic = models.ImageField(upload_to = 'profile_images/')
     location = models.CharField(max_length = 100) 

@@ -4,6 +4,7 @@ from rest_framework.views import APIView
 from .models import Project, Profile
 from .serializer import ProjectSerializer, ProfileSerializer
 from rest_framework import status   # handles all status code responses
+from .forms import SignUpForm 
 
 #........
 # Create your views here.
@@ -37,3 +38,19 @@ class ProfileList(APIView):
             serializers.save()
             return Response(serializers.data, status=status.HTTP_201_CREATED)
         return Response(serializers.errors, status = status.HTTP_400_BAD_REQUEST)
+
+
+def signup(request):
+    if request.method == 'POST':
+        form = SignUpForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get('username')
+            raw_password = form.cleaned_data.get('password1')
+            user = authenticate(username=username, password=raw_password)
+            login(request, user)
+            return redirect('index')
+    else:
+        form = SignUpForm()
+    return render(request, 'registration/signup.html', {'form': form})
+
