@@ -8,6 +8,8 @@ from .forms import SignUpForm, UploadForm
 from django.contrib.auth import login, authenticate
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.decorators.csrf import csrf_exempt
+from django.http import HttpResponseRedirect, JsonResponse
+from django.contrib.auth.models import User
 
 
 #........
@@ -61,3 +63,18 @@ def signup(request):
 @csrf_exempt
 def index(request):
     return render(request, 'index.html')
+
+def posts(request):
+    users = User.objects.exclude(id=request.user.id)
+    if request.method == 'POST':
+        form = UploadForm(request.POST, request.FILES)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.user = request.user.profile
+            post.save()
+            return redirect('index')
+    else:
+        form = UploadForm()
+
+    return render(request, 'post.html', {'form': form})
+
