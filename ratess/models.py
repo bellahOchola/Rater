@@ -11,5 +11,5 @@ class Project(models.Model):
 
 class Profile(models.Model):
     bio = models.TextField(max_length = 500)
-    profile_pic = models.ImageField(upload_to='profile_images/')
+    profile_pic = ImageField(blank=True, manual_crop="")
     location = models.CharField(max_length = 100) 

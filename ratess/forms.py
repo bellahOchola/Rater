@@ -17,3 +17,8 @@ class UploadForm(forms.ModelForm):
     class Meta:
         model = Project
         fields = ('title', 'description', 'image')
+
+class UploadProfile(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = ('profile_pic', 'bio', 'location')

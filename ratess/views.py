@@ -4,7 +4,7 @@ from rest_framework.views import APIView
 from .models import Project, Profile
 from .serializer import ProjectSerializer, ProfileSerializer
 from rest_framework import status   # handles all status code responses
-from .forms import SignUpForm, UploadForm 
+from .forms import SignUpForm, UploadForm, UploadProfile 
 from django.contrib.auth import login, authenticate
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.decorators.csrf import csrf_exempt
@@ -77,4 +77,18 @@ def posts(request):
         form = UploadForm()
 
     return render(request, 'post.html', {'form': form})
+
+def profile(request):
+    users = User.objects.exclude(id=request.user.id)
+    if request.method == 'POST':
+        form = UploadProfile(request.POST,request.FILES)
+        if form.is_valid():
+            profile = form.save(commit=False)
+            profile.save()
+            return redirect('index')
+    else:
+        form = UploadProfile()
+
+    return render(request, 'profile.html', {'form': form})
+
 
