@@ -62,15 +62,15 @@ def signup(request):
 
 @csrf_exempt
 def index(request):
-    return render(request, 'index.html')
+    all_posts = Project.objects.all()
+    return render(request, 'index.html', {'all_posts': all_posts})
 
 def posts(request):
     users = User.objects.exclude(id=request.user.id)
     if request.method == 'POST':
-        form = UploadForm(request.POST, request.FILES)
+        form = UploadForm(request.POST,request.FILES)
         if form.is_valid():
             post = form.save(commit=False)
-            post.user = request.user.profile
             post.save()
             return redirect('index')
     else:

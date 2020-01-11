@@ -1,13 +1,15 @@
 from django.db import models
+from pyuploadcare.dj.models import ImageField
 
 # Create your models here.
 class Project(models.Model):
     title = models.CharField(max_length = 100)
+    image = ImageField(blank=True, manual_crop="")
     description = models.TextField(max_length = 500)
-    image_pic = models.ImageField(upload_to = 'images/')
     posted = models.DateTimeField(auto_now_add=True, null=True)
+    
 
 class Profile(models.Model):
     bio = models.TextField(max_length = 500)
-    profile_pic = models.ImageField(upload_to = 'profile_images/')
+    profile_pic = models.ImageField(upload_to='profile_images/')
     location = models.CharField(max_length = 100) 

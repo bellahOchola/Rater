@@ -1,6 +1,18 @@
 {% extends 'base2.html' %}
 
+
 {% block content %}
 <h1>HELLOW</h1>
+{% for posts in all_posts %}
+<div class="card">
+    <div class="card-title">
+        <h3>{{posts.title}}</h3>
+    </div>
+    <div class="card-body">
+        <img src="{{posts.image.cdn_url}}" alt="{{posts.title}}">
+    </div>
+</div>
+{% empty %}
+{% endfor %}
 
 {% endblock %}

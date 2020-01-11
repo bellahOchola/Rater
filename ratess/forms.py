@@ -2,6 +2,8 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from .models import Profile, Project
+from django.db import models
+from pyuploadcare.dj.forms import ImageField
 
 class SignUpForm(UserCreationForm):
     email = forms.EmailField(max_length=200, help_text='Required. Inform a valid email address.')
@@ -11,6 +13,7 @@ class SignUpForm(UserCreationForm):
         fields = ('username', 'email', 'password1', 'password2')
 
 class UploadForm(forms.ModelForm):
+    # image = ImageField(label='image')
     class Meta:
         model = Project
-        fields = ('title', 'description', 'image_pic',)
+        fields = ('title', 'description', 'image')
