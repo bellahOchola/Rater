@@ -63,7 +63,8 @@ def signup(request):
 @csrf_exempt
 def index(request):
     all_posts = Project.objects.all()
-    return render(request, 'index.html', {'all_posts': all_posts})
+    users = User.objects.exclude(id=request.user.id)
+    return render(request, 'index.html', {'all_posts': all_posts}, {'users':users})
 
 def posts(request):
     users = User.objects.exclude(id=request.user.id)
@@ -71,12 +72,13 @@ def posts(request):
         form = UploadForm(request.POST,request.FILES)
         if form.is_valid():
             post = form.save(commit=False)
+            post.user = request.user.profile
             post.save()
             return redirect('index')
     else:
         form = UploadForm()
 
-    return render(request, 'post.html', {'form': form})
+    return render(request, 'post.html', {'form': form}, {'users':users})
 
 def profile(request):
     users = User.objects.exclude(id=request.user.id)
@@ -89,6 +91,6 @@ def profile(request):
     else:
         form = UploadProfile()
 
-    return render(request, 'profile.html', {'form': form})
+    return render(request, 'profile.html', {'form': form}, {'users':users})
 
 

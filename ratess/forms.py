@@ -16,7 +16,7 @@ class UploadForm(forms.ModelForm):
     # image = ImageField(label='image')
     class Meta:
         model = Project
-        fields = ('title', 'description', 'image')
+        fields = ('title', 'description', 'image', 'url')
 
 class UploadProfile(forms.ModelForm):
     class Meta:
