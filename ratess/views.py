@@ -72,7 +72,7 @@ def posts(request):
         form = UploadForm(request.POST,request.FILES)
         if form.is_valid():
             post = form.save(commit=False)
-            post.user = request.user.profile
+            post.user = request.user
             post.save()
             return redirect('index')
     else:
@@ -80,7 +80,7 @@ def posts(request):
 
     return render(request, 'post.html', {'form': form}, {'users':users})
 
-def profile(request):
+def profile(request, username):
     users = User.objects.exclude(id=request.user.id)
     if request.method == 'POST':
         form = UploadProfile(request.POST,request.FILES)

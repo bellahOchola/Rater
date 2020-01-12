@@ -9,8 +9,9 @@
                 <a href="{% url 'single_post' posts.id%}"><img src="{{posts.image.cdn_url}}" class="card-img-top" alt="{{posts.title}}" style="  height: 200px;"></a>
                 <div class="card-body">
                   <h5 class="card-title">{{posts.title}}</h5>
-                  <a href="{{posts.url}}"><button type="button" class="btn btn-outline-info">view site</button></a>
-                  
+                  <a href="{{posts.url}}"><button type="button" class="btn btn-info">view site</button></a>
+                  <hr>
+                  <p>Posted: {{posts.posted|date}}</p>
                 </div>
               </div>
             {% empty %}
