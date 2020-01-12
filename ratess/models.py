@@ -43,6 +43,9 @@ class Project(models.Model):
     def __str__(self):
         return f'{self.user.name} Project'
 
+    def get_absolute_url(self):
+        return f"/single_post/{self.id}"
+
     def save_project(self):
         self.save()
 

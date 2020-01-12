@@ -13,7 +13,7 @@ urlpatterns = [
     path('', views.index, name='index'),
     path('post/', views.posts, name='posts' ),
     path('profile/', views.profile, name='profile' ),
-    path('single-post/', views.single_post, name='single_post')
+    path('single-post/<id>/', views.single_post, name='single_post')
 ]
 
 if settings.DEBUG:

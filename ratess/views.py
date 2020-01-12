@@ -94,7 +94,8 @@ def profile(request):
     return render(request, 'profile.html', {'form': form}, {'users':users})
 
 
-def single_post(request):
-    return render(request, 'single_post.html',)
+def single_post(request, id):
+    image = get_object_or_404(Project, pk=id)
+    return render(request, 'single_post.html', {'image':image})
 
 
