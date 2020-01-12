@@ -12,7 +12,8 @@ urlpatterns = [
     path('account/', include('django.contrib.auth.urls')),
     path('', views.index, name='index'),
     path('post/', views.posts, name='posts' ),
-    path('profile/', views.profile, name='profile' )
+    path('profile/', views.profile, name='profile' ),
+    path('single-post/', views.single_post, name='single_post')
 ]
 
 if settings.DEBUG:

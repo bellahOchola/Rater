@@ -11,8 +11,8 @@
                     <hr>
                 </div>
                 <div class="card-body">
-                    <img src="{{posts.image.cdn_url}}" alt="{{posts.title}}" width="200">
-                    <a href="{{posts.url}}"><button type="button" class="btn btn-outline-info">View site</button></a>
+                    <a href="{% url 'single_post' %}"><img src="{{posts.image.cdn_url}}" alt="{{posts.title}}" width="200"></a>
+                    <a href="{{posts.url}}"><button type="button" class="btn btn-outline-info">view site</button></a>
                     <!-- <p>posted by: {{posts.user.user.username}}</p> -->
                 </div>
                 
