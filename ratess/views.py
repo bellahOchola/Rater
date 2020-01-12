@@ -10,6 +10,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponseRedirect, JsonResponse
 from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
 
 
 #........
@@ -66,6 +67,7 @@ def index(request):
     users = User.objects.exclude(id=request.user.id)
     return render(request, 'index.html', {'all_posts': all_posts}, {'users':users})
 
+@login_required(login_url='login')
 def posts(request):
     users = User.objects.exclude(id=request.user.id)
     if request.method == 'POST':
@@ -80,6 +82,7 @@ def posts(request):
 
     return render(request, 'post.html', {'form': form}, {'users':users})
 
+@login_required(login_url='login')
 def profile(request, username):
     users = User.objects.exclude(id=request.user.id)
     if request.method == 'POST':
@@ -93,9 +96,25 @@ def profile(request, username):
 
     return render(request, 'profile.html', {'form': form}, {'users':users})
 
-
+@login_required(login_url='login')
 def single_post(request, id):
     image = get_object_or_404(Project, pk=id)
     return render(request, 'single_post.html', {'image':image})
+
+@login_required(login_url='login')
+def search_project(request):
+    if request.method == 'GET':
+        title = request.GET.get("title")
+        details = Project.objects.filter(title__icontains=title).all()
+        message = f'name'
+        params = {
+            'details': details,
+            'message': message
+        }
+        return render(request, 'search.html', params)
+    else:
+        message = "You haven't searched for any project"
+    return render(request, 'search.html', {'message': message})
+
 
 
