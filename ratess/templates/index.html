@@ -5,18 +5,14 @@
 <div class="container">
     <div class="row">
         {% for posts in all_posts %}
-        <div class="col-md-4 card" style="margin-left: 20px;">
-                <div class="card-title">
-                    <h3>{{posts.title}}</h3>
-                    <hr>
-                </div>
+        <div class="card" style="height: 50%; width: 30%; margin-top: 100px; margin-left: 30px; margin-bottom: 20px; box-shadow: 2px 2px 5px grey;">
+                <a href="{% url 'single_post' posts.id%}"><img src="{{posts.image.cdn_url}}" class="card-img-top" alt="{{posts.title}}" style="  height: 200px;"></a>
                 <div class="card-body">
-                    <a href="{% url 'single_post' posts.id%}"><img src="{{posts.image.cdn_url}}" alt="{{posts.title}}" width="200"></a>
-                    <a href="{{posts.url}}"><button type="button" class="btn btn-outline-info">view site</button></a>
-                    <!-- <p>posted by: {{posts.user.user.username}}</p> -->
+                  <h5 class="card-title">{{posts.title}}</h5>
+                  <a href="{{posts.url}}"><button type="button" class="btn btn-outline-info">view site</button></a>
+                  
                 </div>
-                
-            </div>
+              </div>
             {% empty %}
         {% endfor %}
     </div>
