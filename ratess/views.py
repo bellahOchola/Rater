@@ -67,14 +67,11 @@ def index(request):
 
     try:
         all_posts = Project.objects.all()
-        all_posts = all_posts[::-1]
-        a_post = random.randint(0, len(all_posts)-1)
         leader=Rating.get_leading_project()
-        random_post = all_posts[a_post]
     except Project.DoesNotExist:
         posts = None
 
-    return render(request, 'index.html', {'all_posts': all_posts, 'random_post': random_post,'leader':leader})
+    return render(request, 'index.html', {'all_posts': all_posts, 'leader':leader})
     # return render(request, 'index.html', {'all_posts': all_posts}, {'users':users})
 
 @login_required(login_url='login')
@@ -84,7 +81,7 @@ def posts(request):
         form = UploadForm(request.POST,request.FILES)
         if form.is_valid():
             post = form.save(commit=False)
-            post.user = request.user
+            post.user = request.user.profile
             post.save()
             return redirect('index')
     else:
