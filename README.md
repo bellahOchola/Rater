@@ -11,7 +11,7 @@ This application simplyballows a user to login or signup to the system if new an
 * Install the dependencies in the requirements.txt file.
 * Run the code on terminal using the command --- python3.6 manage.py runserver
 ## Live Page
-
+https://majorawwards.herokuapp.com/
 ## BDD
 | Behaviour | Output |
 | :----------------: | :---------------: |

@@ -1,1 +1,1 @@
-web:gunicorn rateApp.wsgi
+web: gunicorn rateApp.wsgi
