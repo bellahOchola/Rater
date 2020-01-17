@@ -6,7 +6,7 @@ from .serializer import ProjectSerializer, ProfileSerializer
 from rest_framework import status   # handles all status code responses
 from .forms import SignUpForm, UploadForm, UploadProfile, RatingsForm 
 from django.contrib.auth import login, authenticate
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import redirect, get_object_or_404
 from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponseRedirect, JsonResponse
 from django.contrib.auth.models import User
@@ -71,7 +71,7 @@ def index(request):
     except Project.DoesNotExist:
         posts = None
 
-    return render(request, 'index.html', {'all_posts': all_posts, 'leader':leader})
+    return render(request, 'index.html', {'all_posts': all_posts, 'leader':leader })
     # return render(request, 'index.html', {'all_posts': all_posts}, {'users':users})
 
 @login_required(login_url='login')
@@ -91,7 +91,8 @@ def posts(request):
 
 @login_required(login_url='login')
 def profile(request, username):
-    users = User.objects.exclude(id=request.user.id)
+    users = get_object_or_404(User, username=username)
+   
     if request.method == 'POST':
         form = UploadProfile(request.POST,request.FILES)
         if form.is_valid():

@@ -36,4 +36,41 @@
                     </div>
                 </div>
             </div>
+            <div class="container" style="margin-top:8%">
+                    <div class="content-section">
+                        <div class="media">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-1"></div>
+                                    <div class="col-md-3">
+                                        <img class="rounded-circle account-img" src="{{ users.profile.profile_pic.cdn_url }}">
+                                    </div>
+                                    <div class="col-md-6 mt-3">
+                                        <div class="media-body">
+                                            <div class="account-heading">
+                                                <span class="mr-3 text-secondary username">{{ users.profile.username }}</span>
+                                                
+                                            </div>
+                                        </div>
+                                        <h5>{{ user.profile.name }}</h5>
+                                        <p class="text-secondary">{{ user.profile.bio }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <hr class="mt-4">
+                    <div class="card-columns">
+                        {% for image in images %}
+                        <div class="card">
+                            <div class="card-body parent ">
+                                <div class="im">
+                                <img src="{{image.image.cdn_url}}" alt="{{image.title}}" class="card-img">
+                                
+                                    </div>
+                                    </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
             {% endblock %}
